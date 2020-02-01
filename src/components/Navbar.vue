@@ -1,7 +1,9 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <router-link class="navbar-brand" :to="{path: '/'}">Ecommerce</router-link>
+      <router-link class="navbar-brand" :to="{ path: '/' }"
+        >Ecommerce</router-link
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -15,10 +17,10 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto"></ul>
+        <form @keydown="search(keyword)" class="form-inline my-2 my-lg-0">
           <input
+            v-model="keyword"
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search"
@@ -34,7 +36,20 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      keyword: ""
+    };
+  },
+  methods: {
+    ...mapActions(["search"]),
+    searching() {
+      this.search(this.keyword);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>

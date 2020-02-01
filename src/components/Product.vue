@@ -10,7 +10,9 @@
           <p class="card-text">
             Price: <strong>${{ item.price }}</strong>
           </p>
-          <a href="#" class="btn btn-primary">Add To Cart</a>
+          <a @click="addToCartItem(item)" class="btn btn-primary"
+            >Add To Cart</a
+          >
         </div>
       </div>
     </div>
@@ -22,7 +24,11 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "products",
   methods: {
-    ...mapActions(["fetchAllProducts"])
+    ...mapActions(["fetchAllProducts", "addToCart"]),
+
+    addToCartItem(item) {
+      this.addToCart(item);
+    }
   },
   computed: {
     ...mapGetters(["getAllProducts"])

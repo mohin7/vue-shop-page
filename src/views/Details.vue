@@ -8,13 +8,13 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">{{item.title}}</h5>
+              <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">
-               {{item.description}}
+                {{ item.description }}
               </p>
-              <p class="card-text">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </p>
+              <button class="btn btn-success" @click="addToCartItem(item)">
+                Add Item
+              </button>
             </div>
           </div>
         </div>
@@ -26,6 +26,7 @@
 
 <script>
 import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Details",
   data() {
@@ -33,7 +34,16 @@ export default {
       item: null
     };
   },
+  computed: {
+    ...mapGetters(["getCart"])
+  },
   methods: {
+    ...mapActions(["fetchAllProducts", "addToCart"]),
+
+    addToCartItem(item) {
+      this.addToCart(item);
+    },
+
     fetchItem() {
       var self = this;
       axios
@@ -44,8 +54,8 @@ export default {
     }
   },
   mounted() {
-    this.fetchItem()
-  },
+    this.fetchItem();
+  }
 };
 </script>
 
