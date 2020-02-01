@@ -12,7 +12,9 @@
         :key="idx"
         class="list-group-item d-flex justify-content-between align-items-center"
       >
-        {{ item.title }}
+        <router-link :to="{ path: '/details/' + item.id }">{{
+          item.title
+        }}</router-link>
         <button @click="removeCartItem(idx)" class="btn btn-danger btn-sm">
           x
         </button>
